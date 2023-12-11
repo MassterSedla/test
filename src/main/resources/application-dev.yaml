@@ -1,0 +1,18 @@
+spring:
+  docker:
+    compose:
+      enabled: true
+      lifecycle-management: start_only
+      file: docker-compose.yaml
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: jdbc:mysql://db:33065/test
+    password: test
+    username: test

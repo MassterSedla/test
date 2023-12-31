@@ -1,11 +1,13 @@
 package com.example.test.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class AuthException {
+public class AuthException extends Exception{
     private int status;
     private String message;
     private Date timestamp;

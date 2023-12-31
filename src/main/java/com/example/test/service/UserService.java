@@ -1,13 +1,8 @@
 package com.example.test.service;
 
 import com.example.test.dto.RegistrationUserDto;
-import com.example.test.model.Comment;
 import com.example.test.model.Role;
-import com.example.test.model.Task;
 import com.example.test.model.User;
-import com.example.test.repository.CommentRepository;
-import com.example.test.repository.RoleRepository;
-import com.example.test.repository.TaskRepository;
 import com.example.test.repository.UserRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -60,8 +54,6 @@ public class UserService implements UserDetailsService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
-
 
     @Override
     @Transactional

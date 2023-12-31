@@ -11,8 +11,8 @@ spring:
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
   datasource:
-    url: jdbc:mysql://db:33065/test
+    url: jdbc:mysql://db:33066/test
     password: test
     username: test

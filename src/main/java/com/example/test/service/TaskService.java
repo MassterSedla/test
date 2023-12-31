@@ -52,12 +52,11 @@ public class TaskService {
         } else if (!task.getAuthor().getUsername().equals(username)) {
             return new ResponseEntity<>(new AuthException(HttpStatus.BAD_REQUEST.value(),
                     "you cannot edit this task\n"), HttpStatus.BAD_REQUEST);
-        } else {
-            editedTask.setId(task.getId());
-            editedTask.setAuthor(task.getAuthor());
-            editedTask.setPerformer(task.getPerformer());
-            return ResponseEntity.ok(taskRepository.save(editedTask));
         }
+        editedTask.setId(task.getId());
+        editedTask.setAuthor(task.getAuthor());
+        editedTask.setPerformer(task.getPerformer());
+        return ResponseEntity.ok(taskRepository.save(editedTask));
     }
 
     public ResponseEntity<?> editTaskStatus(Task editedTask, String username) {
@@ -66,10 +65,9 @@ public class TaskService {
                 && !task.getAuthor().getUsername().equals(username)) {
             return new ResponseEntity<>(new AuthException(HttpStatus.BAD_REQUEST.value(),
                     "you cannot edit status this task\n"), HttpStatus.BAD_REQUEST);
-        } else {
-            task.setStatus(editedTask.getStatus());
-            return ResponseEntity.ok(taskRepository.save(task));
         }
+        task.setStatus(editedTask.getStatus());
+        return ResponseEntity.ok(taskRepository.save(task));
     }
 
     public ResponseEntity<?> appointAnExecutor(Performer performer, Long taskId, String username) {
@@ -81,10 +79,9 @@ public class TaskService {
         } else if ((user = userRepository.findByUsername(performer.getUsername())) == null) {
             return new ResponseEntity<>(new AuthException(HttpStatus.BAD_REQUEST.value(),
                     "that performer doesn't exist\n"), HttpStatus.BAD_REQUEST);
-        } else {
-            task.setPerformer(user);
-            return ResponseEntity.ok(taskRepository.save(task));
         }
+        task.setPerformer(user);
+        return ResponseEntity.ok(taskRepository.save(task));
     }
 
     public ResponseEntity<?> takeTask(Long taskId, String username) {
@@ -93,13 +90,12 @@ public class TaskService {
         if (task.getPerformer() != null) {
             return new ResponseEntity<>(new AuthException(HttpStatus.BAD_REQUEST.value(),
                     "this task is busy\n"), HttpStatus.BAD_REQUEST);
-        } else {
-            task.setPerformer(user);
-            return ResponseEntity.ok(taskRepository.save(task));
         }
+        task.setPerformer(user);
+        return ResponseEntity.ok(taskRepository.save(task));
     }
 
-    public ResponseEntity<?> deleteTask(Long id) {
+    public ResponseEntity<HttpStatus> deleteTask(Long id) {
         taskRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

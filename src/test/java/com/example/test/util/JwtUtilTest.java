@@ -47,14 +47,14 @@ class JwtUtilTest {
     }
 
     @Test
-    void generatedToken() {
+    void generatedTokenTest() {
         String token = jwtUtil.generatedToken(user);
         assertNotNull(token);
         assertEquals(jwtUtil.getUsernameFromToken(token), user.getUsername());
     }
 
     @Test
-    void getUsernameFromToken() {
+    void getUsernameFromTokenTest() {
         String token = jwtUtil.generatedToken(user);
         String username = jwtUtil.getUsernameFromToken(token);
         assertNotNull(username);
@@ -62,7 +62,7 @@ class JwtUtilTest {
     }
 
     @Test
-    void getRoleFromToken() {
+    void getRoleFromTokenTest() {
         String token = jwtUtil.generatedToken(user);
         List<String> roles = jwtUtil.getRoleFromToken(token);
         assertNotNull(roles);

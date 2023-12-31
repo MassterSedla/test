@@ -19,11 +19,11 @@ public class CommentService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
 
-    public ResponseEntity<?> writeComment(Long taskId, String comment, String author) {
+    public Comment writeComment(Long taskId, String comment, String author) {
         Task task = taskRepository.findById(taskId).get();
         User user = userRepository.findByUsername(author);
         Comment savedComment = new Comment(user, comment, task);
-        return ResponseEntity.ok(commentRepository.save(savedComment));
+        return commentRepository.save(savedComment);
     }
 
     public List<Comment> showCommentToTask(Long id) {

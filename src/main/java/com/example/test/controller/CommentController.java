@@ -24,9 +24,13 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> writeComment(@PathVariable Long taskId,
+    public ResponseEntity<Comment> writeComment(@PathVariable Long taskId,
                                           @Valid @RequestBody CommentDto comment,
                                           Principal principal) {
-        return service.writeComment(taskId, comment.getComment(), principal.getName());
+        return ResponseEntity.ok(
+                service.writeComment(taskId,
+                        comment.getComment(), principal.getName()
+                )
+        );
     }
 }
